@@ -133,48 +133,578 @@ button:hover {
     <div class="box">
         <h3>Practical 1 - Matrix</h3>
         <p class="question">
-            Q. Create a 2 × 3 matrix in R.
+            Arithmetic Operations in C#
         </p>
 
-        <pre><code>m <- matrix(
-  c(1,2,3,4,5,6),
-  nrow=2,
-  ncol=3
-)
-print(m)</code></pre>
+        <pre><code>using System;
+
+class Program
+{
+static void Main()
+{
+int a = 10, b = 5;
+Console.WriteLine("Addition = " + (a + b));
+Console.WriteLine("Subtraction = " + (a - b));
+Console.WriteLine("Multiplication = " + (a * b));
+Console.WriteLine("Division = " + (a / b));
+}
+}
+</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
 
     <!-- CODE 2 -->
     <div class="box">
-        <h3>Practical 2 - Data Frame</h3>
+        <h3>Practical 1</h3>
         <p class="question">
-            Q. Create a data frame in R.
+            Floyd's Triangle
         </p>
 
-        <pre><code>name <- c("Amit","Rahul")
-marks <- c(80,90)
-
-data <- data.frame(name, marks)
-print(data)</code></pre>
+        <pre><code>using System;
+class Program
+{
+    static void Main()
+    {
+        int n = 5, num = 1;
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= i; j++)
+                Console.Write(num++ + " ");
+            Console.WriteLine();
+        }
+    }
+}</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
 
-    <!-- CODE 3 -->
-    <div class="box">
-        <h3>Practical 3 - List</h3>
+
+        <div class="box">
+        <h3>Practical 1</h3>
         <p class="question">
-            Q. Create a list in R.
+            Sort City Names
         </p>
 
-        <pre><code>mylist <- list(
-  name = "Amit",
-  age = 20,
-  marks = 90
-)
-print(mylist)</code></pre>
+        <pre><code>using System;
+class Program
+{
+    static void Main()
+    {
+        string[] cities = new string[10];
+        for (int i = 0; i < 10; i++)
+            cities[i] = Console.ReadLine();
+
+        Array.Sort(cities);
+        foreach (string city in cities)
+            Console.WriteLine(city);
+    }
+}</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+            <div class="box">
+        <h3>Practical</h3>
+        <p class="question">
+         Function Overloading
+        </p>
+
+        <pre><code>using System;
+class Program
+{
+    static int Add(int a, int b) => a + b;
+    static int Add(int a, int b, int c) => a + b + c;
+
+    static void Main()
+    {
+        Console.WriteLine(Add(2, 3));
+        Console.WriteLine(Add(2, 3, 4));
+    }
+}</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+            <div class="box">
+        <h3>Practical 1 - Data Frame</h3>
+        <p class="question">
+            Student Registration Form
+        </p>
+
+        <pre><code>@page
+<h2>Student Registration</h2>
+
+<form onsubmit="event.preventDefault();
+document.getElementById('out').innerText =
+'Welcome ' + document.getElementById('name').value;">
+    Name:
+    <input id="name" required>
+    <br><br>
+
+    Gender:
+    <input type="radio" name="gender" required> Male
+    <input type="radio" name="gender"> Female
+    <br><br>
+
+    Course:
+    <select>
+        <option>BSc IT</option>
+        <option>BSc CS</option>
+        <option>BCA</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<p id="out"></p></code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+            <div class="box">
+        <h3>Practical 1 - Data Frame</h3>
+        <p class="question">
+            Constructor Overloading
+        </p>
+
+        <pre><code>using System;
+
+class Student
+{
+public Student()
+{
+Console.WriteLine("Default constructor");
+}
+
+public Student(string name)
+{
+Console.WriteLine("Student: " + name);
+}
+}
+
+class Program
+{
+static void Main()
+{
+Student s1 = new Student();
+Student s2 = new Student("Rahul");
+}
+}
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+            <div class="box">
+        <h3>Practical 1</h3>
+        <p class="question">
+             Inheritance
+        </p>
+
+        <pre><code>using System;
+
+class Animal
+{
+public void Eat() => Console.WriteLine("Animal is eating");
+}
+
+class Dog : Animal
+{
+public void Bark() => Console.WriteLine("Dog is barking");
+}
+
+class Program
+{
+static void Main()
+{
+Dog d = new Dog();
+d.Eat();
+d.Bark();
+}
+}
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+        <div class="box">
+        <h3>Practical 1</h3>
+        <p class="question">
+            Constructor Overloading
+        </p>
+
+        <pre><code>using System;
+
+class Student
+{
+public Student()
+{
+Console.WriteLine("Default constructor");
+}
+
+public Student(string name)
+{
+Console.WriteLine("Student: " + name);
+}
+}
+
+class Program
+{
+static void Main()
+{
+Student s1 = new Student();
+Student s2 = new Student("Rahul");
+}
+}</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+        <div class="box">
+        <h3>Practical 1</h3>
+        <p class="question">
+            Delegates and Events
+        </p>
+
+        <pre><code>using System;
+
+class Alarm
+{
+public event Action? Ring;
+
+public void Start()
+{
+Console.WriteLine("Alarm started");
+Ring?.Invoke();
+}
+}
+
+class Program
+{
+static void Main()
+{
+Alarm alarm = new Alarm();
+alarm.Ring += () => Console.WriteLine("Event received!");
+alarm.Start();
+}
+}
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+            <div class="box">
+        <h3>Practical 1</h3>
+        <p class="question">
+            BankAccount with Balance Validation
+        </p>
+
+        <pre><code>using System;
+
+class BankAccount
+{
+public string AccountNumber { get; set; }
+
+private decimal balance;
+public decimal Balance
+{
+get => balance;
+set
+{
+if (value < 0)
+throw new ArgumentException("Balance cannot be negative");
+balance = value;
+}
+}
+
+public BankAccount(string accountNumber, decimal balance)
+{
+AccountNumber = accountNumber;
+Balance = balance;
+}
+}
+
+class Program
+{
+static void Main()
+{
+BankAccount account = new BankAccount("A101", 500);
+Console.WriteLine(account.AccountNumber);
+Console.WriteLine(account.Balance);
+}
+}
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+
+
+    
+
+
+
+
+
+    <!-- CODE 3 -->
+    <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            Employee CRUD API Using EF Core
+        </p>
+
+        <pre><code>using Microsoft.EntityFrameworkCore;
+
+// Register AppDbContext in Program.cs and define Employee with Id and Name.
+
+app.MapGet("/employees", async (AppDbContext db) =>
+await db.Employees.ToListAsync());
+
+app.MapPost("/employees", async (Employee employee, AppDbContext db) =>
+{
+db.Employees.Add(employee);
+await db.SaveChangesAsync();
+return Results.Ok(employee);
+});
+
+app.MapPut("/employees/{id:int}", async (int id, Employee input, AppDbContext db) =>
+{
+var employee = await db.Employees.FindAsync(id);
+if (employee is null) return Results.NotFound();
+
+employee.Name = input.Name;
+await db.SaveChangesAsync();
+return Results.Ok(employee);
+});
+
+app.MapDelete("/employees/{id:int}", async (int id, AppDbContext db) =>
+{
+var employee = await db.Employees.FindAsync(id);
+if (employee is null) return Results.NotFound();
+
+db.Employees.Remove(employee);
+await db.SaveChangesAsync();
+return Results.NoContent();
+});
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+        <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            Service Worker
+        </p>
+
+        <pre><code>self.addEventListener("install", event => {
+    event.waitUntil(
+        caches.open("v1").then(cache =>
+            cache.addAll(["offline.html"])
+        )
+    );
+});
+
+self.addEventListener("fetch", event => {
+    event.respondWith(
+        fetch(event.request).catch(() =>
+            caches.match("offline.html")
+        )
+    );
+});</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+        <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            Factorial Web API
+        </p>
+
+        <pre><code>var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/factorial/{n:int}", (int n) =>
+{
+    if (n < 0 || n > 20)
+        return Results.BadRequest("Invalid number");
+
+    long fact = 1;
+    for (int i = 1; i <= n; i++)
+        fact *= i;
+
+    return Results.Ok(new { Number = n, Factorial = fact });
+});
+
+app.Run();</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+        <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            Factorial Web API
+        </p>
+
+        <pre><code>var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/factorial/{n:int}", (int n) =>
+{
+if (n < 0 || n > 20)
+return Results.BadRequest("Enter a number from 0 to 20");
+
+long fact = 1;
+for (int i = 1; i <= n; i++)
+fact *= i;
+
+return Results.Ok(new { Number = n, Factorial = fact });
+});
+
+app.Run();
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+        <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            Insert Product Using Entity Framework Core
+        </p>
+
+        <pre><code>using Microsoft.EntityFrameworkCore;
+
+public class Product
+{
+public int Id { get; set; }
+public string Name { get; set; } = "";
+public decimal Price { get; set; }
+}
+
+public class AppDbContext : DbContext
+{
+public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+public DbSet<Product> Products => Set<Product>();
+}
+
+// In an ASP.NET Core endpoint after registering AppDbContext:
+app.MapPost("/products", async (Product product, AppDbContext db) =>
+{
+db.Products.Add(product);
+await db.SaveChangesAsync();
+return Results.Created("/products/" + product.Id, product);
+});
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+    <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            Cookies in ASP.NET Core
+        </p>
+
+        <pre><code>var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/set-cookie", (HttpContext context) =>
+{
+context.Response.Cookies.Append("StudentName", "Rahul",
+new CookieOptions { HttpOnly = true, SameSite = SameSiteMode.Lax });
+return "Cookie created";
+});
+
+app.MapGet("/get-cookie", (HttpContext context) =>
+{
+return context.Request.Cookies.TryGetValue("StudentName", out var name)
+? "Student: " + name
+: "Cookie not found";
+});
+
+app.Run();
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+    <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            AdRotator Control 
+        </p>
+
+        <pre><code>using System;
+
+public partial class AdvertisementPage : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+// AdRotator displays ads configured in its XML advertisement file.
+lblMessage.Text = "Advertisement loaded.";
+}
+
+protected void AdRotator1_AdCreated(object sender, AdCreatedEventArgs e)
+{
+// e.NavigateUrl contains the selected advertisement URL.
+lblMessage.Text = "Ad selected: " + Server.HtmlEncode(e.AlternateText);
+}
+}
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+    <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            Validation Controls 
+        </p>
+
+        <pre><code>using System;
+
+public partial class Registration : System.Web.UI.Page
+{
+protected void btnSubmit_Click(object sender, EventArgs e)
+{
+Page.Validate();
+
+if (Page.IsValid)
+lblMessage.Text = "Registration successful!";
+else
+lblMessage.Text = "Please correct the entered details.";
+}
+}
+</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
