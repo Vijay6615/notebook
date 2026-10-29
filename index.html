@@ -131,24 +131,33 @@ button:hover {
 
     <!-- CODE 1: Yahan apna question aur code add karo -->
     <div class="box">
-        <h3>Practical 1 - Matrix</h3>
+        <h3>Practical 1 </h3>
         <p class="question">
-            Arithmetic Operations in C#
+            Vacuum Cleaner Agent
         </p>
 
-        <pre><code>using System;
+        <pre><code>def vacuum_agent(location, status):
+    if status == "Dirty":
+        return "Suck"
+    elif location == "A":
+        return "Move Right"
+    return "Move Left"
+ 
+rooms = {"A": "Dirty", "B": "Dirty"}
+location = "A"
+ 
+while "Dirty" in rooms.values():
+    action = vacuum_agent(location, rooms[location])
+    print("Location:", location, "Action:", action)
+    if action == "Suck":
+        rooms[location] = "Clean"
+    elif action == "Move Right":
+        location = "B"
+    else:
+        location = "A"
+ 
+print("Final rooms:", rooms)
 
-class Program
-{
-static void Main()
-{
-int a = 10, b = 5;
-Console.WriteLine("Addition = " + (a + b));
-Console.WriteLine("Subtraction = " + (a - b));
-Console.WriteLine("Multiplication = " + (a * b));
-Console.WriteLine("Division = " + (a / b));
-}
-}
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
@@ -158,23 +167,15 @@ Console.WriteLine("Division = " + (a / b));
     <div class="box">
         <h3>Practical 1</h3>
         <p class="question">
-            Floyd's Triangle
+            Sequence of Actions
         </p>
 
-        <pre><code>using System;
-class Program
-{
-    static void Main()
-    {
-        int n = 5, num = 1;
-        for (int i = 1; i <= n; i++)
-        {
-            for (int j = 1; j <= i; j++)
-                Console.Write(num++ + " ");
-            Console.WriteLine();
-        }
-    }
-}</code></pre>
+        <pre><code>actions = ["Start", "Move Forward", "Turn Right",
+           "Move Forward", "Stop"]
+ 
+for step, action in enumerate(actions, start=1):
+    print(step, action)
+</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
@@ -183,23 +184,41 @@ class Program
         <div class="box">
         <h3>Practical 1</h3>
         <p class="question">
-            Sort City Names
+            Water Jug Problem
         </p>
 
-        <pre><code>using System;
-class Program
-{
-    static void Main()
-    {
-        string[] cities = new string[10];
-        for (int i = 0; i < 10; i++)
-            cities[i] = Console.ReadLine();
-
-        Array.Sort(cities);
-        foreach (string city in cities)
-            Console.WriteLine(city);
-    }
-}</code></pre>
+        <pre><code>from collections import deque
+ 
+def water_jug(cap1, cap2, target):
+    queue = deque([(0, 0)])
+    visited = set()
+ 
+    while queue:
+        a, b = queue.popleft()
+        if (a, b) in visited:
+            continue
+        visited.add((a, b))
+        print(a, b)
+ 
+        if a == target or b == target:
+            print("Target achieved!")
+            return
+ 
+        pour12 = min(a, cap2 - b)
+        pour21 = min(b, cap1 - a)
+        next_states = [
+            (cap1, b), (a, cap2), (0, b), (a, 0),
+            (a - pour12, b + pour12),
+            (a + pour21, b - pour21)
+        ]
+        for state in next_states:
+            if state not in visited:
+                queue.append(state)
+ 
+    print("Solution not found")
+ 
+water_jug(4, 3, 2)
+</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
@@ -208,21 +227,39 @@ class Program
             <div class="box">
         <h3>Practical</h3>
         <p class="question">
-         Function Overloading
+         Least Cost Path
         </p>
 
-        <pre><code>using System;
-class Program
-{
-    static int Add(int a, int b) => a + b;
-    static int Add(int a, int b, int c) => a + b + c;
-
-    static void Main()
-    {
-        Console.WriteLine(Add(2, 3));
-        Console.WriteLine(Add(2, 3, 4));
-    }
-}</code></pre>
+        <pre><code>import heapq
+ 
+graph = {
+    "A": [("B", 1), ("C", 4)],
+    "B": [("C", 2), ("D", 5)],
+    "C": [("D", 1)],
+    "D": []
+}
+ 
+def least_cost_path(start, goal):
+    pq = [(0, start, [start])]
+    visited = set()
+ 
+    while pq:
+        cost, node, path = heapq.heappop(pq)
+        if node == goal:
+            print("Path:", path)
+            print("Total cost:", cost)
+            return
+        if node in visited:
+            continue
+        visited.add(node)
+        for neighbor, weight in graph[node]:
+            if neighbor not in visited:
+                heapq.heappush(
+                    pq, (cost + weight, neighbor, path + [neighbor])
+                )
+ 
+least_cost_path("A", "D")
+</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
@@ -230,73 +267,24 @@ class Program
 
 
             <div class="box">
-        <h3>Practical 1 - Data Frame</h3>
+        <h3>Practical 1 </h3>
         <p class="question">
-            Student Registration Form
+            Graph Distance / Shortest Path
         </p>
 
-        <pre><code>@page
-<h2>Student Registration</h2>
-
-<form onsubmit="event.preventDefault();
-document.getElementById('out').innerText =
-'Welcome ' + document.getElementById('name').value;">
-    Name:
-    <input id="name" required>
-    <br><br>
-
-    Gender:
-    <input type="radio" name="gender" required> Male
-    <input type="radio" name="gender"> Female
-    <br><br>
-
-    Course:
-    <select>
-        <option>BSc IT</option>
-        <option>BSc CS</option>
-        <option>BCA</option>
-    </select>
-    <br><br>
-
-    <button type="submit">Submit</button>
-</form>
-
-<p id="out"></p></code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-            <div class="box">
-        <h3>Practical 1 - Data Frame</h3>
-        <p class="question">
-            Constructor Overloading
-        </p>
-
-        <pre><code>using System;
-
-class Student
-{
-public Student()
-{
-Console.WriteLine("Default constructor");
-}
-
-public Student(string name)
-{
-Console.WriteLine("Student: " + name);
-}
-}
-
-class Program
-{
-static void Main()
-{
-Student s1 = new Student();
-Student s2 = new Student("Rahul");
-}
-}
+        <pre><code>import networkx as nx
+ 
+G = nx.Graph()
+G.add_weighted_edges_from([
+    ("A", "B", 2), ("A", "C", 4),
+    ("B", "D", 3), ("C", "D", 1)
+])
+ 
+path = nx.shortest_path(G, "A", "D", weight="weight")
+cost = nx.shortest_path_length(G, "A", "D", weight="weight")
+ 
+print("Shortest path:", path)
+print("Least cost:", cost)
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
@@ -307,30 +295,94 @@ Student s2 = new Student("Rahul");
             <div class="box">
         <h3>Practical 1</h3>
         <p class="question">
-             Inheritance
+            Puzzle Using Greedy Best-First Search
         </p>
 
-        <pre><code>using System;
+        <pre><code>import heapq
+ 
+start = (1, 2, 3, 4, 0, 6, 7, 5, 8)
+goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
+ 
+def heuristic(state):
+    return sum(1 for i in range(9)
+               if state[i] != 0 and state[i] != goal[i])
+ 
+def solve(start):
+    pq = [(heuristic(start), start, [start])]
+    visited = set()
+ 
+    while pq:
+        _, state, path = heapq.heappop(pq)
+        if state == goal:
+            print("Solution:")
+            for s in path:
+                print(s[:3], s[3:6], s[6:])
+            return
+        if state in visited:
+            continue
+        visited.add(state)
+        zero = state.index(0)
+        r, c = divmod(zero, 3)
+ 
+        for dr, dc in [(1,0), (-1,0), (0,1), (0,-1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < 3 and 0 <= nc < 3:
+                j = nr * 3 + nc
+                new = list(state)
+                new[zero], new[j] = new[j], new[zero]
+                new = tuple(new)
+                if new not in visited:
+                    heapq.heappush(
+                        pq, (heuristic(new), new, path + [new])
+                    )
+ 
+solve(start)
 
-class Animal
-{
-public void Eat() => Console.WriteLine("Animal is eating");
-}
+</code></pre>
 
-class Dog : Animal
-{
-public void Bark() => Console.WriteLine("Dog is barking");
-}
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
 
-class Program
-{
-static void Main()
-{
-Dog d = new Dog();
-d.Eat();
-d.Bark();
-}
-}
+
+
+            <div class="box">
+        <h3>Practical 1</h3>
+        <p class="question">
+             Puzzle Using Breadth-First Search
+        </p>
+
+        <pre><code>from collections import deque
+ 
+start = (1, 2, 3, 4, 0, 6, 7, 5, 8)
+goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
+ 
+def solve(start):
+    queue = deque([(start, [start])])
+    visited = {start}
+ 
+    while queue:
+        state, path = queue.popleft()
+        if state == goal:
+            print("Moves:", len(path) - 1)
+            for s in path:
+                print(s[:3], s[3:6], s[6:])
+            return
+        zero = state.index(0)
+        r, c = divmod(zero, 3)
+ 
+        for dr, dc in [(1,0), (-1,0), (0,1), (0,-1)]:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < 3 and 0 <= nc < 3:
+                j = nr * 3 + nc
+                new = list(state)
+                new[zero], new[j] = new[j], new[zero]
+                new = tuple(new)
+                if new not in visited:
+                    visited.add(new)
+                    queue.append((new, path + [new]))
+ 
+solve(start)
+
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
@@ -340,32 +392,21 @@ d.Bark();
         <div class="box">
         <h3>Practical 1</h3>
         <p class="question">
-            Constructor Overloading
+            Weighted Graph Representation
         </p>
 
-        <pre><code>using System;
-
-class Student
-{
-public Student()
-{
-Console.WriteLine("Default constructor");
-}
-
-public Student(string name)
-{
-Console.WriteLine("Student: " + name);
-}
-}
-
-class Program
-{
-static void Main()
-{
-Student s1 = new Student();
-Student s2 = new Student("Rahul");
-}
-}</code></pre>
+        <pre><code>import networkx as nx
+ 
+G = nx.Graph()
+G.add_weighted_edges_from([
+    ("A", "B", 5), ("A", "C", 3),
+    ("B", "D", 2), ("C", "D", 4)
+])
+ 
+print("Weighted graph edges:")
+for u, v, weight in G.edges(data="weight"):
+    print(u, "-", v, "Weight:", weight)
+</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
@@ -374,31 +415,18 @@ Student s2 = new Student("Rahul");
         <div class="box">
         <h3>Practical 1</h3>
         <p class="question">
-            Delegates and Events
+            Probability Test
         </p>
 
-        <pre><code>using System;
+        <pre><code>total_outcomes = 6
+favourable_outcomes = 3
+ 
+probability = favourable_outcomes / total_outcomes
+ 
+print("Total outcomes:", total_outcomes)
+print("Favourable outcomes:", favourable_outcomes)
+print("Probability:", probability)
 
-class Alarm
-{
-public event Action? Ring;
-
-public void Start()
-{
-Console.WriteLine("Alarm started");
-Ring?.Invoke();
-}
-}
-
-class Program
-{
-static void Main()
-{
-Alarm alarm = new Alarm();
-alarm.Ring += () => Console.WriteLine("Event received!");
-alarm.Start();
-}
-}
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
@@ -409,43 +437,21 @@ alarm.Start();
             <div class="box">
         <h3>Practical 1</h3>
         <p class="question">
-            BankAccount with Balance Validation
+            Naive Bayes Classification on a Small Dataset
         </p>
 
-        <pre><code>using System;
+        <pre><code>from sklearn.naive_bayes import GaussianNB
+ 
+X = [[20, 30], [25, 40], [30, 50],
+     [60, 80], [65, 85], [70, 90]]
+y = ["Low", "Low", "Low", "High", "High", "High"]
+ 
+model = GaussianNB()
+model.fit(X, y)
+ 
+prediction = model.predict([[28, 45]])
+print("Predicted class:", prediction[0])
 
-class BankAccount
-{
-public string AccountNumber { get; set; }
-
-private decimal balance;
-public decimal Balance
-{
-get => balance;
-set
-{
-if (value < 0)
-throw new ArgumentException("Balance cannot be negative");
-balance = value;
-}
-}
-
-public BankAccount(string accountNumber, decimal balance)
-{
-AccountNumber = accountNumber;
-Balance = balance;
-}
-}
-
-class Program
-{
-static void Main()
-{
-BankAccount account = new BankAccount("A101", 500);
-Console.WriteLine(account.AccountNumber);
-Console.WriteLine(account.Balance);
-}
-}
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
@@ -465,42 +471,28 @@ Console.WriteLine(account.Balance);
     <div class="box">
         <h3>Practical 2 </h3>
         <p class="question">
-            Employee CRUD API Using EF Core
+            Bayesian Network Using pgmpy
         </p>
 
-        <pre><code>using Microsoft.EntityFrameworkCore;
+        <pre><code># Install first: pip install pgmpy
+from pgmpy.models import DiscreteBayesianNetwork
+from pgmpy.factors.discrete import TabularCPD
+ 
+model = DiscreteBayesianNetwork([("Rain", "WetGrass")])
+ 
+cpd_rain = TabularCPD(
+    variable="Rain", variable_card=2,
+    values=[[0.7], [0.3]]
+)
+cpd_wet = TabularCPD(
+    variable="WetGrass", variable_card=2,
+    values=[[0.9, 0.2], [0.1, 0.8]],
+    evidence=["Rain"], evidence_card=[2]
+)
+ 
+model.add_cpds(cpd_rain, cpd_wet)
+print("Model is valid:", model.check_model())
 
-// Register AppDbContext in Program.cs and define Employee with Id and Name.
-
-app.MapGet("/employees", async (AppDbContext db) =>
-await db.Employees.ToListAsync());
-
-app.MapPost("/employees", async (Employee employee, AppDbContext db) =>
-{
-db.Employees.Add(employee);
-await db.SaveChangesAsync();
-return Results.Ok(employee);
-});
-
-app.MapPut("/employees/{id:int}", async (int id, Employee input, AppDbContext db) =>
-{
-var employee = await db.Employees.FindAsync(id);
-if (employee is null) return Results.NotFound();
-
-employee.Name = input.Name;
-await db.SaveChangesAsync();
-return Results.Ok(employee);
-});
-
-app.MapDelete("/employees/{id:int}", async (int id, AppDbContext db) =>
-{
-var employee = await db.Employees.FindAsync(id);
-if (employee is null) return Results.NotFound();
-
-db.Employees.Remove(employee);
-await db.SaveChangesAsync();
-return Results.NoContent();
-});
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
@@ -511,80 +503,22 @@ return Results.NoContent();
         <div class="box">
         <h3>Practical 2 </h3>
         <p class="question">
-            Service Worker
+            Gaussian Probability
         </p>
 
-        <pre><code>self.addEventListener("install", event => {
-    event.waitUntil(
-        caches.open("v1").then(cache =>
-            cache.addAll(["offline.html"])
-        )
-    );
-});
-
-self.addEventListener("fetch", event => {
-    event.respondWith(
-        fetch(event.request).catch(() =>
-            caches.match("offline.html")
-        )
-    );
-});</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-        <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            Factorial Web API
-        </p>
-
-        <pre><code>var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-app.MapGet("/factorial/{n:int}", (int n) =>
-{
-    if (n < 0 || n > 20)
-        return Results.BadRequest("Invalid number");
-
-    long fact = 1;
-    for (int i = 1; i <= n; i++)
-        fact *= i;
-
-    return Results.Ok(new { Number = n, Factorial = fact });
-});
-
-app.Run();</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-        <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            Factorial Web API
-        </p>
-
-        <pre><code>var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-app.MapGet("/factorial/{n:int}", (int n) =>
-{
-if (n < 0 || n > 20)
-return Results.BadRequest("Enter a number from 0 to 20");
-
-long fact = 1;
-for (int i = 1; i <= n; i++)
-fact *= i;
-
-return Results.Ok(new { Number = n, Factorial = fact });
-});
-
-app.Run();
+        <pre><code>import numpy as np
+from scipy.stats import norm
+ 
+data = np.array([10, 12, 14, 16, 18])
+mean = np.mean(data)
+std = np.std(data)
+ 
+x = 15
+probability = norm.pdf(x, mean, std)
+ 
+print("Mean:", mean)
+print("Standard deviation:", std)
+print("PDF at", x, ":", probability)
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
@@ -595,31 +529,69 @@ app.Run();
         <div class="box">
         <h3>Practical 2 </h3>
         <p class="question">
-            Insert Product Using Entity Framework Core
+            Decision Tree Classification
         </p>
 
-        <pre><code>using Microsoft.EntityFrameworkCore;
+        <pre><code>from sklearn.tree import DecisionTreeClassifier
+ 
+X = [[20, 80], [25, 75], [45, 40],
+     [50, 30], [22, 85], [48, 35]]
+y = ["Pass", "Pass", "Fail", "Fail", "Pass", "Fail"]
+ 
+model = DecisionTreeClassifier(random_state=0)
+model.fit(X, y)
+ 
+print("Predicted class:", model.predict([[23, 82]])[0])
+print("Training accuracy:", model.score(X, y))
+</code></pre>
 
-public class Product
-{
-public int Id { get; set; }
-public string Name { get; set; } = "";
-public decimal Price { get; set; }
-}
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
 
-public class AppDbContext : DbContext
-{
-public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-public DbSet<Product> Products => Set<Product>();
-}
 
-// In an ASP.NET Core endpoint after registering AppDbContext:
-app.MapPost("/products", async (Product product, AppDbContext db) =>
-{
-db.Products.Add(product);
-await db.SaveChangesAsync();
-return Results.Created("/products/" + product.Id, product);
-});
+
+        <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            Decision Tree Regression
+        </p>
+
+        <pre><code>from sklearn.tree import DecisionTreeRegressor
+ 
+X = [[1], [2], [3], [4], [5]]
+y = [100, 200, 300, 400, 500]
+ 
+model = DecisionTreeRegressor(random_state=0)
+model.fit(X, y)
+ 
+print("Predicted value:", model.predict([[3]])[0])
+print("Training score:", model.score(X, y))
+
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
+        <div class="box">
+        <h3>Practical 2 </h3>
+        <p class="question">
+            K-Nearest Neighbours (KNN) Classification
+        </p>
+
+        <pre><code>from sklearn.neighbors import KNeighborsClassifier
+ 
+X = [[1, 2], [2, 3], [3, 3],
+     [6, 7], [7, 8], [8, 8]]
+y = ["A", "A", "A", "B", "B", "B"]
+ 
+model = KNeighborsClassifier(n_neighbors=3)
+model.fit(X, y)
+ 
+print("Predicted class:", model.predict([[2, 2]])[0])
+print("Training accuracy:", model.score(X, y))
+
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
@@ -629,34 +601,35 @@ return Results.Created("/products/" + product.Id, product);
     <div class="box">
         <h3>Practical 2 </h3>
         <p class="question">
-            Cookies in ASP.NET Core
+            Public Dataset Classification (Iris)
         </p>
 
-        <pre><code>var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-
-app.MapGet("/set-cookie", (HttpContext context) =>
-{
-context.Response.Cookies.Append("StudentName", "Rahul",
-new CookieOptions { HttpOnly = true, SameSite = SameSiteMode.Lax });
-return "Cookie created";
-});
-
-app.MapGet("/get-cookie", (HttpContext context) =>
-{
-return context.Request.Cookies.TryGetValue("StudentName", out var name)
-? "Student: " + name
-: "Cookie not found";
-});
-
-app.Run();
+        <pre><code>from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+ 
+data = load_iris()
+X, y = data.data, data.target
+ 
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+ 
+model = DecisionTreeClassifier(random_state=42)
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+ 
+print("Actual values:", y_test)
+print("Predicted values:", predictions)
+print("Accuracy:", accuracy_score(y_test, predictions))
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
 
 
-    <div class="box">
+    <!-- <div class="box">
         <h3>Practical 2 </h3>
         <p class="question">
             AdRotator Control 
@@ -707,7 +680,7 @@ lblMessage.Text = "Please correct the entered details.";
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
+    </div> -->
 
     <!-- NAYA CODE ADD KARNE KE LIYE
     Isi box ko copy karke neeche paste karo:
