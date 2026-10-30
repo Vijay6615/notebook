@@ -284,6 +284,199 @@ Expected output (same sample file):
     </div>
 
 
+    <div class="box">
+        <h3>Practical 1</h3>
+        <p class="question">
+            Linux mein hard link aur soft (symbolic) link create karna aur unka use verify karna
+        </p>
+
+        <pre><code>Step 1 – Terminal open karein
+
+RHEL desktop par Ctrl + Alt + T press karein.
+
+Step 2 – Original file create karein
+
+Ek empty file create hogi.
+
+touch original.txt
+
+Expected output: Usually koi output nahi aayega.
+
+Step 3 – File mein content add karein
+
+File mein text write hoga.
+
+echo "Welcome to Linux" > original.txt
+
+Expected output: Usually koi output nahi aayega.
+
+Step 4 – Hard link create karein
+
+Original file ka hard link create hoga.
+
+ln original.txt hardlink.txt
+
+Expected output: Usually koi output nahi aayega.
+
+Step 5 – Soft link create karein
+
+Original file ka symbolic link create hoga.
+
+ln -s original.txt softlink.txt
+
+Expected output: Usually koi output nahi aayega.
+
+Step 6 – Links verify karein
+
+Original aur hard link ka inode number same hona chahiye. Soft link ke output mein -> original.txt dikhna chahiye.
+
+ls -li
+
+Expected output: Example (numbers, owner aur permissions system ke hisaab se alag ho sakte hain):
+original.txt aur hardlink.txt ke inode numbers same honge.
+softlink.txt -> original.txt
+
+Step 7 – Hard link ka content dekhein
+
+cat hardlink.txt
+
+Expected output: Welcome to Linux
+
+Step 8 – Soft link ka content dekhein
+
+cat softlink.txt
+
+Expected output: Welcome to Linux
+
+Viva: Hard link original file ke same inode ko share karta hai. Soft link (symbolic link) original file ke path ko point karta hai.
+
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+    <div class="box">
+        <h3>Practical 1</h3>
+        <p class="question">
+            File create karke usme 7 lines likhna aur file-handling commands ka output check karna.
+        </p>
+
+        <pre><code>Step 1 – File create karein
+touch hello.txt
+Use: hello.txt naam ki empty file banegi. Expected: Koi output nahi.
+Step 2 – File mein 7 lines likhein
+nano hello.txt
+Nano editor khulega. Neeche ki 7 lines type karein:
+Linux is an operating system
+Linux is free
+Linux is secure
+Linux supports users
+Linux uses commands
+Linux manages files
+Linux is powerful
+Save karne ke liye Ctrl + O, Enter; phir Ctrl + X press karein.
+Step 3 – File ka content dekhein
+cat hello.txt
+Expected output:
+Linux is an operating system
+Linux is free
+Linux is secure
+Linux supports users
+Linux uses commands
+Linux manages files
+Linux is powerful
+Step 4 – File ko reverse order mein dekhein
+tac hello.txt
+Expected output: Lines last se first order mein display hongi:
+Linux is powerful
+Linux manages files
+Linux uses commands
+Linux supports users
+Linux is secure
+Linux is free
+Linux is an operating system
+Step 5 – Starting ki 2 lines dekhein
+head -n 2 hello.txt
+Expected output:
+Linux is an operating system
+Linux is free
+Step 6 – Last ki 3 lines dekhein
+tail -n 3 hello.txt
+Expected output:
+Linux uses commands
+Linux manages files
+Linux is powerful
+Step 7 – Lines, words aur bytes count karein
+wc hello.txt
+Expected output (is exact sample file ke liye):
+7  23  138 hello.txt
+Meaning: 7 = lines, 23 = words, 138 = bytes. File ko isi tarah save karein, last line ke baad Enter/newline ho.
+Step 8 – Characters count karein
+wc -m hello.txt
+Expected output (same sample file):
+138 hello.txt
+
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+    <div class="box">
+        <h3>Practical 1</h3>
+        <p class="question">
+            B  Linux mein hostname set karna aur /etc/hosts ke through hostname resolution verify karna.
+        </p>
+
+        <pre><code>
+            Step 1 – Current hostname check karein
+
+hostname
+
+Expected output: Aapke RHEL system ka current hostname display hoga.
+
+Step 2 – Hostname set karein
+
+Administrator permission ke saath hostname ko linuxlab set karein.
+
+sudo hostnamectl set-hostname linuxlab
+
+Expected output: Usually koi output nahi aayega. Agar sudo password maange toh apna user password enter karein.
+
+Step 3 – Hosts file open karein
+
+File ke end mein ye mapping add karein: 127.0.0.1 linuxlab
+
+sudo nano /etc/hosts
+
+Expected output: Save: Ctrl + O, phir Enter. Exit: Ctrl + X.
+
+127.0.0.1   linuxlab
+
+Step 4 – Hostname verify karein
+
+hostname
+
+Expected output: linuxlab
+
+Step 5 – Hostname resolution check karein
+
+getent command system name-service configuration ke through hostname resolve karke dikhata hai.
+
+getent hosts linuxlab
+
+Expected output: 127.0.0.1 linuxlab (format/spacing alag ho sakti hai).
+
+
+
+</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+
+
 <script>
 async function copyCode(button) {
     const code = button.previousElementSibling
