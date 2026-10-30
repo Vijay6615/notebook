@@ -133,30 +133,41 @@ button:hover {
     <div class="box">
         <h3>Practical 1 </h3>
         <p class="question">
-            Vacuum Cleaner Agent
+            Directories banana, subdirectory banana, rename/move/copy aur directory delete karna.
         </p>
 
-        <pre><code>def vacuum_agent(location, status):
-    if status == "Dirty":
-        return "Suck"
-    elif location == "A":
-        return "Move Right"
-    return "Move Left"
- 
-rooms = {"A": "Dirty", "B": "Dirty"}
-location = "A"
- 
-while "Dirty" in rooms.values():
-    action = vacuum_agent(location, rooms[location])
-    print("Location:", location, "Action:", action)
-    if action == "Suck":
-        rooms[location] = "Clean"
-    elif action == "Move Right":
-        location = "B"
-    else:
-        location = "A"
- 
-print("Final rooms:", rooms)
+        <pre><code>Step 1 – Terminal open karein
+RHEL desktop par Ctrl + Alt + T press karein.
+Step 2 – 3 directories banayein
+mkdir tyit1 tyit2 tyit3
+Use: Ek command se teen folders create honge. Expected: Koi output nahi; prompt wapas aa jayega.
+Step 3 – tyit2 ke andar linux folder banayein
+mkdir tyit2/linux
+Use: tyit2 ke andar subdirectory create hogi. Expected: Koi output nahi.
+Step 4 – tyit3 ka naam tyit4 karein
+mv tyit3 tyit4
+Use: mv command directory ka naam change karegi. Expected: Koi output nahi.
+Step 5 – pqr file banayein
+touch pqr
+Use: Empty file create hogi. Expected: Koi output nahi.
+Step 6 – pqr ko tyit1 mein move karein
+mv pqr tyit1/
+Use: File tyit1 folder ke andar chali jayegi. Expected: Koi output nahi.
+Step 7 – pqr ki copy xyz naam se banayein
+cp tyit1/pqr xyz
+Use: Current directory mein xyz naam ki copy banegi. Expected: Koi output nahi.
+Step 8 – tyit4 delete karein
+rmdir tyit4
+Use: Empty directory delete hogi. Agar directory empty na ho, tab rm -r tyit4 use karein. Expected: Koi output nahi.
+Step 9 – Result verify karein
+ls
+ls tyit1
+ls tyit2
+Expected output (example):
+First ls: tyit1  tyit2  xyz
+ls tyit1: pqr
+ls tyit2: linux
+
 
 </code></pre>
 
@@ -167,221 +178,38 @@ print("Final rooms:", rooms)
     <div class="box">
         <h3>Practical 1</h3>
         <p class="question">
-            Sequence of Actions
+            Do users aur do groups create karna, users ko secondary groups mein add karna aur assignment check karna.
+
         </p>
 
-        <pre><code>actions = ["Start", "Move Forward", "Turn Right",
-           "Move Forward", "Stop"]
- 
-for step, action in enumerate(actions, start=1):
-    print(step, action)
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-        <div class="box">
-        <h3>Practical 1</h3>
-        <p class="question">
-            Water Jug Problem
-        </p>
-
-        <pre><code>from collections import deque
- 
-def water_jug(cap1, cap2, target):
-    queue = deque([(0, 0)])
-    visited = set()
- 
-    while queue:
-        a, b = queue.popleft()
-        if (a, b) in visited:
-            continue
-        visited.add((a, b))
-        print(a, b)
- 
-        if a == target or b == target:
-            print("Target achieved!")
-            return
- 
-        pour12 = min(a, cap2 - b)
-        pour21 = min(b, cap1 - a)
-        next_states = [
-            (cap1, b), (a, cap2), (0, b), (a, 0),
-            (a - pour12, b + pour12),
-            (a + pour21, b - pour21)
-        ]
-        for state in next_states:
-            if state not in visited:
-                queue.append(state)
- 
-    print("Solution not found")
- 
-water_jug(4, 3, 2)
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-            <div class="box">
-        <h3>Practical</h3>
-        <p class="question">
-         Least Cost Path
-        </p>
-
-        <pre><code>import heapq
- 
-graph = {
-    "A": [("B", 1), ("C", 4)],
-    "B": [("C", 2), ("D", 5)],
-    "C": [("D", 1)],
-    "D": []
-}
- 
-def least_cost_path(start, goal):
-    pq = [(0, start, [start])]
-    visited = set()
- 
-    while pq:
-        cost, node, path = heapq.heappop(pq)
-        if node == goal:
-            print("Path:", path)
-            print("Total cost:", cost)
-            return
-        if node in visited:
-            continue
-        visited.add(node)
-        for neighbor, weight in graph[node]:
-            if neighbor not in visited:
-                heapq.heappush(
-                    pq, (cost + weight, neighbor, path + [neighbor])
-                )
- 
-least_cost_path("A", "D")
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-            <div class="box">
-        <h3>Practical 1 </h3>
-        <p class="question">
-            Graph Distance / Shortest Path
-        </p>
-
-        <pre><code>import networkx as nx
- 
-G = nx.Graph()
-G.add_weighted_edges_from([
-    ("A", "B", 2), ("A", "C", 4),
-    ("B", "D", 3), ("C", "D", 1)
-])
- 
-path = nx.shortest_path(G, "A", "D", weight="weight")
-cost = nx.shortest_path_length(G, "A", "D", weight="weight")
- 
-print("Shortest path:", path)
-print("Least cost:", cost)
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-            <div class="box">
-        <h3>Practical 1</h3>
-        <p class="question">
-            Puzzle Using Greedy Best-First Search
-        </p>
-
-        <pre><code>import heapq
- 
-start = (1, 2, 3, 4, 0, 6, 7, 5, 8)
-goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
- 
-def heuristic(state):
-    return sum(1 for i in range(9)
-               if state[i] != 0 and state[i] != goal[i])
- 
-def solve(start):
-    pq = [(heuristic(start), start, [start])]
-    visited = set()
- 
-    while pq:
-        _, state, path = heapq.heappop(pq)
-        if state == goal:
-            print("Solution:")
-            for s in path:
-                print(s[:3], s[3:6], s[6:])
-            return
-        if state in visited:
-            continue
-        visited.add(state)
-        zero = state.index(0)
-        r, c = divmod(zero, 3)
- 
-        for dr, dc in [(1,0), (-1,0), (0,1), (0,-1)]:
-            nr, nc = r + dr, c + dc
-            if 0 <= nr < 3 and 0 <= nc < 3:
-                j = nr * 3 + nc
-                new = list(state)
-                new[zero], new[j] = new[j], new[zero]
-                new = tuple(new)
-                if new not in visited:
-                    heapq.heappush(
-                        pq, (heuristic(new), new, path + [new])
-                    )
- 
-solve(start)
-
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-            <div class="box">
-        <h3>Practical 1</h3>
-        <p class="question">
-             Puzzle Using Breadth-First Search
-        </p>
-
-        <pre><code>from collections import deque
- 
-start = (1, 2, 3, 4, 0, 6, 7, 5, 8)
-goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
- 
-def solve(start):
-    queue = deque([(start, [start])])
-    visited = {start}
- 
-    while queue:
-        state, path = queue.popleft()
-        if state == goal:
-            print("Moves:", len(path) - 1)
-            for s in path:
-                print(s[:3], s[3:6], s[6:])
-            return
-        zero = state.index(0)
-        r, c = divmod(zero, 3)
- 
-        for dr, dc in [(1,0), (-1,0), (0,1), (0,-1)]:
-            nr, nc = r + dr, c + dc
-            if 0 <= nr < 3 and 0 <= nc < 3:
-                j = nr * 3 + nc
-                new = list(state)
-                new[zero], new[j] = new[j], new[zero]
-                new = tuple(new)
-                if new not in visited:
-                    visited.add(new)
-                    queue.append((new, path + [new]))
- 
-solve(start)
+        <pre><code>Step 1 – Do groups banayein
+sudo groupadd group1
+sudo groupadd group2
+Use: group1 aur group2 create honge. Expected: Koi output nahi.
+Step 2 – Do users banayein
+sudo useradd student1
+sudo useradd student2
+Use: Dono local user accounts create honge. Expected: Koi output nahi.
+Step 3 – Users ke passwords set karein
+sudo passwd student1
+sudo passwd student2
+Use: Dono users ke liye password set karein. Password type karte waqt screen par characters nahi dikhte; ye normal hai. Expected: Retype password ke baad “all authentication tokens updated successfully” message.
+Step 4 – student1 ko group2 mein add karein
+sudo usermod -aG group2 student1
+Use: student1 ko group2 mein add karta hai. -a zaroor lagayein, taaki existing supplementary groups remove na hon. Expected: Koi output nahi.
+Step 5 – student2 ko group1 mein add karein
+sudo usermod -aG group1 student2
+Use: student2 ko group1 mein secondary group ke roop mein add karega. Expected: Koi output nahi.
+Step 6 – Group assignments check karein
+groups student1
+groups student2
+Expected output (example):
+student1 : student1 group2
+student2 : student2 group1
+Output mein group1/group2 ka hona verify karein; exact primary-group details system ke hisaab se differ kar sakti hain.
+Step 7 – Detailed verification (optional)
+id student1
+id student2
 
 </code></pre>
 
@@ -392,314 +220,69 @@ solve(start)
         <div class="box">
         <h3>Practical 1</h3>
         <p class="question">
-            Weighted Graph Representation
+            File create karke usme 7 lines likhna aur file-handling commands ka output check karna.
         </p>
 
-        <pre><code>import networkx as nx
- 
-G = nx.Graph()
-G.add_weighted_edges_from([
-    ("A", "B", 5), ("A", "C", 3),
-    ("B", "D", 2), ("C", "D", 4)
-])
- 
-print("Weighted graph edges:")
-for u, v, weight in G.edges(data="weight"):
-    print(u, "-", v, "Weight:", weight)
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-        <div class="box">
-        <h3>Practical 1</h3>
-        <p class="question">
-            Probability Test
-        </p>
-
-        <pre><code>total_outcomes = 6
-favourable_outcomes = 3
- 
-probability = favourable_outcomes / total_outcomes
- 
-print("Total outcomes:", total_outcomes)
-print("Favourable outcomes:", favourable_outcomes)
-print("Probability:", probability)
-
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-            <div class="box">
-        <h3>Practical 1</h3>
-        <p class="question">
-            Naive Bayes Classification on a Small Dataset
-        </p>
-
-        <pre><code>from sklearn.naive_bayes import GaussianNB
- 
-X = [[20, 30], [25, 40], [30, 50],
-     [60, 80], [65, 85], [70, 90]]
-y = ["Low", "Low", "Low", "High", "High", "High"]
- 
-model = GaussianNB()
-model.fit(X, y)
- 
-prediction = model.predict([[28, 45]])
-print("Predicted class:", prediction[0])
-
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-
-
-    
-
-
-
-
-
-    <!-- CODE 3 -->
-    <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            Bayesian Network Using pgmpy
-        </p>
-
-        <pre><code># Install first: pip install pgmpy
-from pgmpy.models import DiscreteBayesianNetwork
-from pgmpy.factors.discrete import TabularCPD
- 
-model = DiscreteBayesianNetwork([("Rain", "WetGrass")])
- 
-cpd_rain = TabularCPD(
-    variable="Rain", variable_card=2,
-    values=[[0.7], [0.3]]
-)
-cpd_wet = TabularCPD(
-    variable="WetGrass", variable_card=2,
-    values=[[0.9, 0.2], [0.1, 0.8]],
-    evidence=["Rain"], evidence_card=[2]
-)
- 
-model.add_cpds(cpd_rain, cpd_wet)
-print("Model is valid:", model.check_model())
+        <pre><code>Step 1 – File create karein
+touch hello.txt
+Use: hello.txt naam ki empty file banegi. Expected: Koi output nahi.
+Step 2 – File mein 7 lines likhein
+nano hello.txt
+Nano editor khulega. Neeche ki 7 lines type karein:
+Linux is an operating system
+Linux is free
+Linux is secure
+Linux supports users
+Linux uses commands
+Linux manages files
+Linux is powerful
+Save karne ke liye Ctrl + O, Enter; phir Ctrl + X press karein.
+Step 3 – File ka content dekhein
+cat hello.txt
+Expected output:
+Linux is an operating system
+Linux is free
+Linux is secure
+Linux supports users
+Linux uses commands
+Linux manages files
+Linux is powerful
+Step 4 – File ko reverse order mein dekhein
+tac hello.txt
+Expected output: Lines last se first order mein display hongi:
+Linux is powerful
+Linux manages files
+Linux uses commands
+Linux supports users
+Linux is secure
+Linux is free
+Linux is an operating system
+Step 5 – Starting ki 2 lines dekhein
+head -n 2 hello.txt
+Expected output:
+Linux is an operating system
+Linux is free
+Step 6 – Last ki 3 lines dekhein
+tail -n 3 hello.txt
+Expected output:
+Linux uses commands
+Linux manages files
+Linux is powerful
+Step 7 – Lines, words aur bytes count karein
+wc hello.txt
+Expected output (is exact sample file ke liye):
+7  23  138 hello.txt
+Meaning: 7 = lines, 23 = words, 138 = bytes. File ko isi tarah save karein, last line ke baad Enter/newline ho.
+Step 8 – Characters count karein
+wc -m hello.txt
+Expected output (same sample file):
+138 hello.txt
 
 </code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
 
-
-
-        <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            Gaussian Probability
-        </p>
-
-        <pre><code>import numpy as np
-from scipy.stats import norm
- 
-data = np.array([10, 12, 14, 16, 18])
-mean = np.mean(data)
-std = np.std(data)
- 
-x = 15
-probability = norm.pdf(x, mean, std)
- 
-print("Mean:", mean)
-print("Standard deviation:", std)
-print("PDF at", x, ":", probability)
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-        <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            Decision Tree Classification
-        </p>
-
-        <pre><code>from sklearn.tree import DecisionTreeClassifier
- 
-X = [[20, 80], [25, 75], [45, 40],
-     [50, 30], [22, 85], [48, 35]]
-y = ["Pass", "Pass", "Fail", "Fail", "Pass", "Fail"]
- 
-model = DecisionTreeClassifier(random_state=0)
-model.fit(X, y)
- 
-print("Predicted class:", model.predict([[23, 82]])[0])
-print("Training accuracy:", model.score(X, y))
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-        <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            Decision Tree Regression
-        </p>
-
-        <pre><code>from sklearn.tree import DecisionTreeRegressor
- 
-X = [[1], [2], [3], [4], [5]]
-y = [100, 200, 300, 400, 500]
- 
-model = DecisionTreeRegressor(random_state=0)
-model.fit(X, y)
- 
-print("Predicted value:", model.predict([[3]])[0])
-print("Training score:", model.score(X, y))
-
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-
-        <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            K-Nearest Neighbours (KNN) Classification
-        </p>
-
-        <pre><code>from sklearn.neighbors import KNeighborsClassifier
- 
-X = [[1, 2], [2, 3], [3, 3],
-     [6, 7], [7, 8], [8, 8]]
-y = ["A", "A", "A", "B", "B", "B"]
- 
-model = KNeighborsClassifier(n_neighbors=3)
-model.fit(X, y)
- 
-print("Predicted class:", model.predict([[2, 2]])[0])
-print("Training accuracy:", model.score(X, y))
-
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-    <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            Public Dataset Classification (Iris)
-        </p>
-
-        <pre><code>from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score
- 
-data = load_iris()
-X, y = data.data, data.target
- 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
- 
-model = DecisionTreeClassifier(random_state=42)
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)
- 
-print("Actual values:", y_test)
-print("Predicted values:", predictions)
-print("Accuracy:", accuracy_score(y_test, predictions))
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-    <!-- <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            AdRotator Control 
-        </p>
-
-        <pre><code>using System;
-
-public partial class AdvertisementPage : System.Web.UI.Page
-{
-protected void Page_Load(object sender, EventArgs e)
-{
-// AdRotator displays ads configured in its XML advertisement file.
-lblMessage.Text = "Advertisement loaded.";
-}
-
-protected void AdRotator1_AdCreated(object sender, AdCreatedEventArgs e)
-{
-// e.NavigateUrl contains the selected advertisement URL.
-lblMessage.Text = "Ad selected: " + Server.HtmlEncode(e.AlternateText);
-}
-}
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-
-
-    <div class="box">
-        <h3>Practical 2 </h3>
-        <p class="question">
-            Validation Controls 
-        </p>
-
-        <pre><code>using System;
-
-public partial class Registration : System.Web.UI.Page
-{
-protected void btnSubmit_Click(object sender, EventArgs e)
-{
-Page.Validate();
-
-if (Page.IsValid)
-lblMessage.Text = "Registration successful!";
-else
-lblMessage.Text = "Please correct the entered details.";
-}
-}
-</code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div> -->
-
-    <!-- NAYA CODE ADD KARNE KE LIYE
-    Isi box ko copy karke neeche paste karo:
-
-    <div class="box">
-        <h3>Practical 4 - Title</h3>
-        <p class="question">
-            Q. Yahan apna question likho.
-        </p>
-
-        <pre><code>
-Yahan apna code likho.
-        </code></pre>
-
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
-    -->
-
-</div>
 
 <script>
 async function copyCode(button) {
