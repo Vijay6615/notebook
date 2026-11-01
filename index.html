@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -129,47 +129,30 @@ button:hover {
 
 <div class="grid" id="codeGrid">
 
-    <!-- CODE 1: Yahan apna question aur code add karo -->
+    <!-- CODE 1 -->
     <div class="box">
-        <h3>Practical 1 </h3>
+        <h3>Practical 1</h3>
         <p class="question">
-            Directories banana, subdirectory banana, rename/move/copy aur directory delete karna.
+            Create a Servlet for a Login Page
         </p>
 
-        <pre><code>Step 1 – Terminal open karein
-RHEL desktop par Ctrl + Alt + T press karein.
-Step 2 – 3 directories banayein
-mkdir tyit1 tyit2 tyit3
-Use: Ek command se teen folders create honge. Expected: Koi output nahi; prompt wapas aa jayega.
-Step 3 – tyit2 ke andar linux folder banayein
-mkdir tyit2/linux
-Use: tyit2 ke andar subdirectory create hogi. Expected: Koi output nahi.
-Step 4 – tyit3 ka naam tyit4 karein
-mv tyit3 tyit4
-Use: mv command directory ka naam change karegi. Expected: Koi output nahi.
-Step 5 – pqr file banayein
-touch pqr
-Use: Empty file create hogi. Expected: Koi output nahi.
-Step 6 – pqr ko tyit1 mein move karein
-mv pqr tyit1/
-Use: File tyit1 folder ke andar chali jayegi. Expected: Koi output nahi.
-Step 7 – pqr ki copy xyz naam se banayein
-cp tyit1/pqr xyz
-Use: Current directory mein xyz naam ki copy banegi. Expected: Koi output nahi.
-Step 8 – tyit4 delete karein
-rmdir tyit4
-Use: Empty directory delete hogi. Agar directory empty na ho, tab rm -r tyit4 use karein. Expected: Koi output nahi.
-Step 9 – Result verify karein
-ls
-ls tyit1
-ls tyit2
-Expected output (example):
-First ls: tyit1  tyit2  xyz
-ls tyit1: pqr
-ls tyit2: linux
+        <pre><code>&lt;html&gt;
+&lt;body&gt;
 
+&lt;form action="LoginServlet" method="post"&gt;
 
-</code></pre>
+    UserName:
+    &lt;input type="text" name="uname"&gt;&lt;br&gt;
+
+    Password:
+    &lt;input type="password" name="pw"&gt;&lt;br&gt;
+
+    &lt;input type="submit" value="LOGIN"&gt;
+
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
@@ -177,315 +160,354 @@ ls tyit2: linux
     <!-- CODE 2 -->
     <div class="box">
         <h3>Practical 1</h3>
-        <p class="question">
-            Do users aur do groups create karna, users ko secondary groups mein add karna aur assignment check karna.
+        <p class="question">LoginServlet.java</p>
 
-        </p>
+        <pre><code>import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
-        <pre><code>Step 1 – Do groups banayein
-sudo groupadd group1
-sudo groupadd group2
-Use: group1 aur group2 create honge. Expected: Koi output nahi.
-Step 2 – Do users banayein
-sudo useradd student1
-sudo useradd student2
-Use: Dono local user accounts create honge. Expected: Koi output nahi.
-Step 3 – Users ke passwords set karein
-sudo passwd student1
-sudo passwd student2
-Use: Dono users ke liye password set karein. Password type karte waqt screen par characters nahi dikhte; ye normal hai. Expected: Retype password ke baad “all authentication tokens updated successfully” message.
-Step 4 – student1 ko group2 mein add karein
-sudo usermod -aG group2 student1
-Use: student1 ko group2 mein add karta hai. -a zaroor lagayein, taaki existing supplementary groups remove na hon. Expected: Koi output nahi.
-Step 5 – student2 ko group1 mein add karein
-sudo usermod -aG group1 student2
-Use: student2 ko group1 mein secondary group ke roop mein add karega. Expected: Koi output nahi.
-Step 6 – Group assignments check karein
-groups student1
-groups student2
-Expected output (example):
-student1 : student1 group2
-student2 : student2 group1
-Output mein group1/group2 ka hona verify karein; exact primary-group details system ke hisaab se differ kar sakti hain.
-Step 7 – Detailed verification (optional)
-id student1
-id student2
+public class LoginServlet extends HttpServlet {
 
-</code></pre>
+    public void doPost(HttpServletRequest request,
+    HttpServletResponse response)
+    throws ServletException, IOException {
 
-        <button onclick="copyCode(this)">📋 Copy Code</button>
-    </div>
+        response.setContentType("text/html");
 
+        PrintWriter out = response.getWriter();
 
-        <div class="box">
-        <h3>Practical 1</h3>
-        <p class="question">
-            File create karke usme 7 lines likhna aur file-handling commands ka output check karna.
-        </p>
+        String username = request.getParameter("uname");
 
-        <pre><code>Step 1 – File create karein
-touch hello.txt
-Use: hello.txt naam ki empty file banegi. Expected: Koi output nahi.
-Step 2 – File mein 7 lines likhein
-nano hello.txt
-Nano editor khulega. Neeche ki 7 lines type karein:
-Linux is an operating system
-Linux is free
-Linux is secure
-Linux supports users
-Linux uses commands
-Linux manages files
-Linux is powerful
-Save karne ke liye Ctrl + O, Enter; phir Ctrl + X press karein.
-Step 3 – File ka content dekhein
-cat hello.txt
-Expected output:
-Linux is an operating system
-Linux is free
-Linux is secure
-Linux supports users
-Linux uses commands
-Linux manages files
-Linux is powerful
-Step 4 – File ko reverse order mein dekhein
-tac hello.txt
-Expected output: Lines last se first order mein display hongi:
-Linux is powerful
-Linux manages files
-Linux uses commands
-Linux supports users
-Linux is secure
-Linux is free
-Linux is an operating system
-Step 5 – Starting ki 2 lines dekhein
-head -n 2 hello.txt
-Expected output:
-Linux is an operating system
-Linux is free
-Step 6 – Last ki 3 lines dekhein
-tail -n 3 hello.txt
-Expected output:
-Linux uses commands
-Linux manages files
-Linux is powerful
-Step 7 – Lines, words aur bytes count karein
-wc hello.txt
-Expected output (is exact sample file ke liye):
-7  23  138 hello.txt
-Meaning: 7 = lines, 23 = words, 138 = bytes. File ko isi tarah save karein, last line ke baad Enter/newline ho.
-Step 8 – Characters count karein
-wc -m hello.txt
-Expected output (same sample file):
-138 hello.txt
+        String password = request.getParameter("pw");
 
-</code></pre>
+        String msg = "";
+
+        if(username.equals("admin") &&
+           password.equals("admin123"))
+
+            msg = "Hello " + username;
+
+        else
+
+            msg = "Login failed";
+
+        out.println("&lt;b&gt;" + msg + "&lt;/b&gt;");
+    }
+}</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
 
-
+    <!-- CODE 3 -->
     <div class="box">
-        <h3>Practical 1</h3>
+        <h3>Practical 2</h3>
         <p class="question">
-            Linux mein hard link aur soft (symbolic) link create karna aur unka use verify karna
+            Develop a simple JSP application to pass values from one page to another with validations
         </p>
 
-        <pre><code>Step 1 – Terminal open karein
+        <pre><code>File: Index.jsp
 
-RHEL desktop par Ctrl + Alt + T press karein.
+&lt;html&gt;
+&lt;body&gt;
 
-Step 2 – Original file create karein
+&lt;form action="Validate.jsp"&gt;
 
-Ek empty file create hogi.
+Enter Your Name
+&lt;input type="text" name="name"&gt;&lt;br&gt;
 
-touch original.txt
+Enter Your Age
+&lt;input type="text" name="age"&gt;&lt;br&gt;
 
-Expected output: Usually koi output nahi aayega.
+Select Hobbies
 
-Step 3 – File mein content add karein
+&lt;input type="checkbox" name="hob"
+value="Singing"&gt;Singing
 
-File mein text write hoga.
+&lt;input type="checkbox" name="hob"
+value="Reading"&gt;Reading Books
 
-echo "Welcome to Linux" > original.txt
+&lt;input type="checkbox" name="hob"
+value="Football"&gt;Playing Football&lt;br&gt;
 
-Expected output: Usually koi output nahi aayega.
+Enter E-mail
+&lt;input type="text" name="email"&gt;&lt;br&gt;
 
-Step 4 – Hard link create karein
+Select Gender
 
-Original file ka hard link create hoga.
+&lt;input type="radio" name="gender"
+value="male"&gt;Male
 
-ln original.txt hardlink.txt
+&lt;input type="radio" name="gender"
+value="female"&gt;Female
 
-Expected output: Usually koi output nahi aayega.
+&lt;input type="radio" name="gender"
+value="other"&gt;Other&lt;br&gt;
 
-Step 5 – Soft link create karein
+&lt;input type="hidden" name="error" value=""&gt;
 
-Original file ka symbolic link create hoga.
+&lt;input type="submit" value="Submit Form"&gt;
 
-ln -s original.txt softlink.txt
+&lt;/form&gt;
 
-Expected output: Usually koi output nahi aayega.
-
-Step 6 – Links verify karein
-
-Original aur hard link ka inode number same hona chahiye. Soft link ke output mein -> original.txt dikhna chahiye.
-
-ls -li
-
-Expected output: Example (numbers, owner aur permissions system ke hisaab se alag ho sakte hain):
-original.txt aur hardlink.txt ke inode numbers same honge.
-softlink.txt -> original.txt
-
-Step 7 – Hard link ka content dekhein
-
-cat hardlink.txt
-
-Expected output: Welcome to Linux
-
-Step 8 – Soft link ka content dekhein
-
-cat softlink.txt
-
-Expected output: Welcome to Linux
-
-Viva: Hard link original file ke same inode ko share karta hai. Soft link (symbolic link) original file ke path ko point karta hai.
-
-</code></pre>
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
 
-
+    <!-- CODE 4 -->
     <div class="box">
-        <h3>Practical 1</h3>
-        <p class="question">
-            File create karke usme 7 lines likhna aur file-handling commands ka output check karna.
-        </p>
+        <h3>Practical 2</h3>
+        <p class="question">CheckerBean.java</p>
 
-        <pre><code>Step 1 – File create karein
-touch hello.txt
-Use: hello.txt naam ki empty file banegi. Expected: Koi output nahi.
-Step 2 – File mein 7 lines likhein
-nano hello.txt
-Nano editor khulega. Neeche ki 7 lines type karein:
-Linux is an operating system
-Linux is free
-Linux is secure
-Linux supports users
-Linux uses commands
-Linux manages files
-Linux is powerful
-Save karne ke liye Ctrl + O, Enter; phir Ctrl + X press karein.
-Step 3 – File ka content dekhein
-cat hello.txt
-Expected output:
-Linux is an operating system
-Linux is free
-Linux is secure
-Linux supports users
-Linux uses commands
-Linux manages files
-Linux is powerful
-Step 4 – File ko reverse order mein dekhein
-tac hello.txt
-Expected output: Lines last se first order mein display hongi:
-Linux is powerful
-Linux manages files
-Linux uses commands
-Linux supports users
-Linux is secure
-Linux is free
-Linux is an operating system
-Step 5 – Starting ki 2 lines dekhein
-head -n 2 hello.txt
-Expected output:
-Linux is an operating system
-Linux is free
-Step 6 – Last ki 3 lines dekhein
-tail -n 3 hello.txt
-Expected output:
-Linux uses commands
-Linux manages files
-Linux is powerful
-Step 7 – Lines, words aur bytes count karein
-wc hello.txt
-Expected output (is exact sample file ke liye):
-7  23  138 hello.txt
-Meaning: 7 = lines, 23 = words, 138 = bytes. File ko isi tarah save karein, last line ke baad Enter/newline ho.
-Step 8 – Characters count karein
-wc -m hello.txt
-Expected output (same sample file):
-138 hello.txt
+        <pre><code>package mypack;
 
-</code></pre>
+import java.beans.*;
+import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class CheckerBean {
+
+    String name, hob, email, gender, error;
+    int age;
+
+    public CheckerBean() {
+        name = "";
+        hob = "";
+        email = "";
+        gender = "";
+        error = "";
+        age = 0;
+    }
+
+    public void setName(String n) {
+        name = n;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setAge(int a) {
+        age = a;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setHob(String h) {
+        hob = h;
+    }
+
+    public String getHob() {
+        return hob;
+    }
+
+    public void setEmail(String e) {
+        email = e;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setGender(String g) {
+        gender = g;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public boolean validate() {
+
+        boolean res = true;
+
+        if(name.trim().equals("")) {
+            error += "&lt;br&gt;Enter First Name";
+            res = false;
+        }
+
+        if(age &lt; 0 || age &gt; 99) {
+            error += "&lt;br&gt;Age Invalid";
+            res = false;
+        }
+
+        String emailregex =
+        "^[\\_A-Za-z0-9-]+(\\\\.[\\_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+
+        Boolean b = email.matches(emailregex);
+
+        if(!b) {
+            error += "&lt;br&gt;email Invalid";
+            res = false;
+        }
+
+        return res;
+    }
+}</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
 
-
+    <!-- CODE 5 -->
     <div class="box">
-        <h3>Practical 1</h3>
-        <p class="question">
-            B  Linux mein hostname set karna aur /etc/hosts ke through hostname resolution verify karna.
-        </p>
+        <h3>Practical 2</h3>
+        <p class="question">Validate.jsp</p>
 
-        <pre><code>
-            Step 1 – Current hostname check karein
+        <pre><code>&lt;%@page contentType="text/html"
+pageEncoding="UTF-8" import="mypack.*"%&gt;
 
-hostname
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;JSP Page&lt;/title&gt;
+&lt;/head&gt;
 
-Expected output: Aapke RHEL system ka current hostname display hoga.
+&lt;body&gt;
 
-Step 2 – Hostname set karein
+&lt;h1&gt;Validation Page&lt;/h1&gt;
 
-Administrator permission ke saath hostname ko linuxlab set karein.
+&lt;jsp:useBean id="obj" scope="request"
+class="mypack.CheckerBean"&gt;
 
-sudo hostnamectl set-hostname linuxlab
+&lt;jsp:setProperty name="obj" property="*"/&gt;
 
-Expected output: Usually koi output nahi aayega. Agar sudo password maange toh apna user password enter karein.
+&lt;/jsp:useBean&gt;
 
-Step 3 – Hosts file open karein
+&lt;%
+if(obj.validate())
+{
+%&gt;
 
-File ke end mein ye mapping add karein: 127.0.0.1 linuxlab
+&lt;jsp:forward page="successful.jsp"/&gt;
 
-sudo nano /etc/hosts
+&lt;%
+}
+else {
+%&gt;
 
-Expected output: Save: Ctrl + O, phir Enter. Exit: Ctrl + X.
+&lt;jsp:include page="Index.jsp"/&gt;
 
-127.0.0.1   linuxlab
+&lt;%
+}
+%&gt;
 
-Step 4 – Hostname verify karein
+&lt;%=obj.getError() %&gt;
 
-hostname
-
-Expected output: linuxlab
-
-Step 5 – Hostname resolution check karein
-
-getent command system name-service configuration ke through hostname resolve karke dikhata hai.
-
-getent hosts linuxlab
-
-Expected output: 127.0.0.1 linuxlab (format/spacing alag ho sakti hai).
-
-
-
-</code></pre>
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
         <button onclick="copyCode(this)">📋 Copy Code</button>
     </div>
 
+    <!-- CODE 6 -->
+    <div class="box">
+        <h3>Practical 2</h3>
+        <p class="question">Successful.jsp</p>
 
+        <pre><code>&lt;%@page contentType="text/html"
+pageEncoding="UTF-8"%&gt;
+
+&lt;!DOCTYPE html&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;JSP Page&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;h1&gt;DATA VALIDATED SUCCESSFULLY&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+    <!-- CODE 7 -->
+    <div class="box">
+        <h3>Practical 3</h3>
+        <p class="question">
+            Create a Servlet that uses Cookies to store the number of times a user has visited the Servlet
+        </p>
+
+        <pre><code>File: CookieServlet.java
+
+package pract2;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class CookieServlet extends HttpServlet {
+
+    private int i = 1;
+
+    public void doGet(HttpServletRequest request,
+    HttpServletResponse response)
+    throws IOException, ServletException {
+
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        String k = String.valueOf(i);
+
+        Cookie c = new Cookie("visit", k);
+
+        response.addCookie(c);
+
+        int j = Integer.parseInt(c.getValue());
+
+        if(j == 1) {
+
+            out.println(
+            "This is the first time you are visiting this page"
+            );
+
+        }
+        else {
+
+            synchronized(CookieServlet.this) {
+
+                out.println(
+                "You visited this page " + i + " times"
+                );
+
+            }
+
+        }
+
+        i++;
+    }
+}</code></pre>
+
+        <button onclick="copyCode(this)">📋 Copy Code</button>
+    </div>
+
+</div>
 
 <script>
 async function copyCode(button) {
+
     const code = button.previousElementSibling
                        .querySelector("code").textContent;
 
     try {
+
         if (navigator.clipboard && window.isSecureContext) {
+
             await navigator.clipboard.writeText(code);
+
         } else {
+
             const area = document.createElement("textarea");
             area.value = code;
             document.body.appendChild(area);
@@ -498,22 +520,28 @@ async function copyCode(button) {
         }
 
         button.textContent = "✅ Copied!";
+
         setTimeout(() => {
             button.textContent = "📋 Copy Code";
         }, 1200);
 
     } catch {
+
         alert("Copy nahi hua. Browser permission check karo.");
+
     }
 }
 
 function searchCodes() {
+
     const value = document.getElementById("search")
                          .value.toLowerCase();
 
     document.querySelectorAll(".box").forEach(box => {
+
         box.style.display = box.textContent.toLowerCase()
             .includes(value) ? "" : "none";
+
     });
 }
 </script>
